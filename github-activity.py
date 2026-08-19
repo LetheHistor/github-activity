@@ -1,8 +1,8 @@
 import requests
 
 def pr(exp):
-    prr = exp["payload"]["pull_request"]["head"]["repo"]["name"]
-    return f"PR Repo: {pr_repo}"
+    prr = exp["payload"]["action"]
+    return f"{prr}"
     
 def p(exp):
     commits = len(exp["payload"].get("commits", []))
@@ -11,10 +11,6 @@ def p(exp):
 def c(exp):
     btr = exp["payload"]["ref_type"]
     return f"{btr}"
-
-def i(exp):
-    action = exp["payload"]["action"]
-    return f"{action}"
 
 def ic(exp):
     title = exp["payload"]["issue"]["title"]
@@ -25,10 +21,9 @@ def r(exp):
     return f"{tagName}"
 
 DISPATCH_TABLE = {
-    "PullRequestEvent": pr,
+    "PullRequestEvent", "IssuesEvent": pr,
     "PushEvent": p,
     "CreateEvent", "DeleteEvent": c,
-    "IssuesEvent": i,
     "IssuesCommentEvent": ic,
     "ReleaseEvent": r,
 }
