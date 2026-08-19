@@ -21,7 +21,7 @@ def r(exp):
     return f"{tagName}"
 
 DISPATCH_TABLE = {
-    "PullRequestEvent", "IssuesEvent": pr,
+    "PullRequestEvent", "IssuesEvent", "PullRequestReviewCommentEvent", "PullRequestReviewEvent": pr,
     "PushEvent": p,
     "CreateEvent", "DeleteEvent": c,
     "IssuesCommentEvent": ic,
