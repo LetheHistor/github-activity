@@ -14,7 +14,7 @@ def c(exp):
 DISPATCH_TABLE = {
     "PullRequestEvent": pr,
     "PushEvent": p,
-    "CreateEvent" c,
+    "CreateEvent", "DeleteEvent": c,
 }
 user = input()
 response = requests.get(f"https://api.github.com/users/{user}/events")
