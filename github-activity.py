@@ -13,14 +13,19 @@ def c(exp):
     return f"{btr}"
 
 def i(exp):
-    action: exp["payload"]["action"]
+    action = exp["payload"]["action"]
     return f"{action}"
+
+def ic(exp):
+    title = exp["payload"]["issue"]["title"]
+    return f"{title}"
 
 DISPATCH_TABLE = {
     "PullRequestEvent": pr,
     "PushEvent": p,
     "CreateEvent", "DeleteEvent": c,
     "IssuesEvent": i,
+    "IssuesCommentEvent": ic,
 }
 user = input()
 response = requests.get(f"https://api.github.com/users/{user}/events")
