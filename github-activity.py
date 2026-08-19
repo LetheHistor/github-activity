@@ -5,7 +5,10 @@ def pr(exp):
     return f"{prr}"
     
 def p(exp):
-    commits = len(exp["payload"].get("commits", []))
+    commits = exp["payload"].get("size", 0)
+    branch = exp["payload"].get("ref", "").replace("refs/heads/", "")
+    if branch:
+        return f"Pushed {commits} commit(s) to {branch}"
     return f"Pushed {commits} commit(s)"
 
 def c(exp):
