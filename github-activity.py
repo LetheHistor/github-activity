@@ -19,6 +19,10 @@ def i(exp):
 def ic(exp):
     title = exp["payload"]["issue"]["title"]
     return f"{title}"
+    
+def r(exp):
+    tagName = exp["payload"]["release"]["tag_name"]
+    return f"{tagName}"
 
 DISPATCH_TABLE = {
     "PullRequestEvent": pr,
@@ -26,6 +30,7 @@ DISPATCH_TABLE = {
     "CreateEvent", "DeleteEvent": c,
     "IssuesEvent": i,
     "IssuesCommentEvent": ic,
+    "ReleaseEvent": r,
 }
 user = input()
 response = requests.get(f"https://api.github.com/users/{user}/events")
