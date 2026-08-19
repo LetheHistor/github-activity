@@ -21,13 +21,17 @@ def r(exp):
     return f"{tagName}"
 
 DISPATCH_TABLE = {
-    "PullRequestEvent", "IssuesEvent", "PullRequestReviewCommentEvent", "PullRequestReviewEvent": pr,
+    "PullRequestEvent": pr,
+    "IssuesEvent": pr,
+    "PullRequestReviewCommentEvent": pr,
+    "PullRequestReviewEvent": pr,
     "PushEvent": p,
-    "CreateEvent", "DeleteEvent": c,
-    "IssuesCommentEvent": ic,
+    "CreateEvent": c,
+    "DeleteEvent": c,
+    "IssueCommentEvent": ic,
     "ReleaseEvent": r,
 }
-user = input()
+user = input("Enter github username: ")
 response = requests.get(f"https://api.github.com/users/{user}/events")
 if response.status_code == 200:
     rjson = response.json()
@@ -41,4 +45,6 @@ if response.status_code == 200:
         else:
             print(f"{i}. {eventType} | {repoName}")
         print("--------------------")
+else:
+    print(f"Error fetching activity. Status code: {response.status_code}")
 input("\nPress Enter to exit.")
