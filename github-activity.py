@@ -41,3 +41,4 @@ if response.status_code == 200:
         else:
             print(f"{i}. {eventType} | {repoName}")
         print("--------------------")
+input("\nPress Enter to exit.")
